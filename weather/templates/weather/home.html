@@ -1,4 +1,41 @@
 {% extends 'weather/base.html' %}
 {% block content %}
 
+<div class="container text-center text-justify pt-4">
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      {{ form.as_p }}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<div class="container text-center text-justify pt-4">
+
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">City</th>
+        <th scope="col">Temperature</th>
+        <th scope="col">Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for w in weather_data%}
+      <tr>
+        
+          <td class="align-middle">{{ w.location }}</td>
+          <td class="align-middle">{{ w.temp }}°C</td>
+          <td class="align-middle">{{ w.condition_text }} <img src="https:{{ w.condition_icon }}" alt="{{ w.condition_text }}"></td>
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+</div>
 {% endblock content %}
